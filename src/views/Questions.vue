@@ -35,7 +35,15 @@
         </Button>
       </template>
       <template v-else>
-        <span><SvgIcon icon="icon_circle_check" /> Succes! </span>
+        <span>
+          <a
+            id="changeLabel"
+            href="https://www.kcaf.nl/funderingslabel/"
+            target="_blank"
+          >
+            Label wijzigen?
+          </a>
+        </span>
       </template>
     </template>
   </Page>
@@ -145,6 +153,11 @@ export default class Questions extends Vue {
 </script>
 
 <style lang="scss">
+#changeLabel {
+  display: flex;
+  align-items: center;
+  color: #606976;
+}
 .slide-enter-active {
   transition: all 0.3s ease;
 }
