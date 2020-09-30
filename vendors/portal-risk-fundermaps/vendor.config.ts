@@ -11,9 +11,9 @@ export default {
     background: background,
     logo: logo,
     home: {
-        title: "Wat doen we?",
-        subtitle: "Bij het funderingsloket van FunderMaps kunt u melding maken van funderingsschade aan panden.",
-        content: "<p>Meldingen worden behandeld door het KCAF (Kennis Centrum Aanpak Funderingsproblematiek), een onafhankelijke stichting die tot doel heeft om kennis rond fundering te verzamelen, te verbeteren en te delen.</p><p>Het KCAF al sinds 2012 het landelijk funderingsloket waar meldingen en klachten worden gedaan en behandeld.</p>",
+        title: "Opvragen Funderingslabel",
+        subtitle: "Het Funderingslabel geeft een indicatie van het te verwachten risico op funderingsproblematiek.",
+        content: "<p>Het label is tot stand gekomen door het combineren van pandgegevens en gegevens over ondergrond en grondwater. Toetsingen worden uitgevoerd voor; schimmelaantasting door droogstand van houten palen (paalrot), bacteriële aantasting (palenpest), gebrek aan draagkracht/negatieve kleef, bodemdaling/bodeminklinking en verschilzakking voor niet onderheide panden.</p><p>Meer informatie over funderingsproblematiek en de toetsingen vindt u op de website van het onafhankelijk <a href='https://www.kcaf.nl/funderingslabel/' target='_blank'>Kennis Centrum Aanpak Funderingsproblematiek</a>.</p>",
         image: homeImage
     },
     final: {
