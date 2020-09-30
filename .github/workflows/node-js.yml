@@ -1,0 +1,96 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+
+env:
+  NODEJS_VERSION: '14.x'
+  BREAKPOINT: '900px'
+  VUE_APP_PRIMARY_COLOR: '#2657FF'
+  VUE_APP_CLIENTID: 57
+  VUE_APP_MAPBOX_TOKEN: 'pk.eyJ1Ijoiam91cm5leXdvcmtzIiwiYSI6ImNrZXUwbG1zYjJtZXUzM284czQ5OGxvNHQifQ.CR6UwylpbEJh7rH4IE9wgA'
+  VUE_APP_MAPBOX_STYLE: 'mapbox://styles/journeyworks/ckeu0ndyc99j319qqz5ywaz2b'
+  VUE_APP_API_BASE_URL: 'https://staging.fundermaps.com'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODEJS_VERSION }}
+    - run: npm install
+    - run: npm run build
+
+  deploy:
+    name: Deploy
+    env:
+      ARCHIVE: ${{ matrix.vendor }}.${{ github.sha }}.tar.gz
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [build]
+
+    strategy:
+      matrix:
+        vendor: [portal-fundermaps]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODEJS_VERSION }}
+
+    - name: Print version
+      run: |
+        find src -type f -exec sed -i "s/@@VERSION@@/$(git describe --long --always)/" {} +
+        find src -type f -exec sed -i "s/@@COMMIT@@/$(git rev-parse HEAD)/" {} +
+
+    - run: npm install
+    - run: npm run build -- --vendor=${{ matrix.vendor }}
+
+    - name: Package version
+      run: |
+        git describe --long --always > dist/VERSION
+        git rev-parse HEAD > dist/COMMIT
+
+    - name: Create archive
+      run: tar -czf ${{ env.ARCHIVE }} -C dist .
+
+    - name: Copy archive via scp
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        source: ${{ env.ARCHIVE }}
+        target: '/var/cache/deployment/tmp'
+
+    - name: Running deploy script
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          mv /var/cache/deployment/current/${{ matrix.vendor }}.*.tar.gz /var/cache/deployment/previous/
+          mv /var/cache/deployment/tmp/${{ env.ARCHIVE }} /var/cache/deployment/current/
+          /var/cache/deployment/deploy.sh ${{ matrix.vendor }}
+          rm -f $(ls -1t /var/cache/deployment/previous/${{ matrix.vendor }}.*.tar.gz | tail -n +5)
