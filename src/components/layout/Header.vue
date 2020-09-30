@@ -4,7 +4,11 @@
       <img class="Header__Logo" :src="vendorLogo" alt="Logo" />
     </div>
     <div class="Header__Group">
-      <img class="Header__Logo" :src="kcafLogo" alt="Logo__Second" />
+      <img
+        class="Header__Logo Header__Logo__Second"
+        :src="kcafLogo"
+        alt="Logo__Second"
+      />
       <a href="" target="_blank">Hulp nodig?</a>
     </div>
     <ProgressBar v-if="steps" :step="step" :steps="steps" />
@@ -86,6 +90,13 @@ export default class Page extends Vue {
     @media only screen and (min-width: $BREAKPOINT) {
       max-height: 80px;
       margin: auto 40px;
+    }
+  }
+
+  &__Logo__Second {
+    display: none;
+    @media only screen and (min-width: $BREAKPOINT) {
+      display: initial;
     }
   }
 
