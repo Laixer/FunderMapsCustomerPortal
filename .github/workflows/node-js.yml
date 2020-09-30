@@ -13,15 +13,19 @@ env:
   NODEJS_VERSION: '14.x'
   BREAKPOINT: '900px'
   VUE_APP_PRIMARY_COLOR: '#2657FF'
-  VUE_APP_CLIENTID: 57
   VUE_APP_MAPBOX_TOKEN: 'pk.eyJ1Ijoiam91cm5leXdvcmtzIiwiYSI6ImNrZXUwbG1zYjJtZXUzM284czQ5OGxvNHQifQ.CR6UwylpbEJh7rH4IE9wgA'
   VUE_APP_MAPBOX_STYLE: 'mapbox://styles/journeyworks/ckeu0ndyc99j319qqz5ywaz2b'
   VUE_APP_API_BASE_URL: 'https://staging.fundermaps.com'
+
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        vendor: [portal-risk-fundermaps]
     
     steps:
     - uses: actions/checkout@v2
@@ -31,7 +35,7 @@ jobs:
       with:
         node-version: ${{ env.NODEJS_VERSION }}
     - run: npm install
-    - run: npm run build
+    - run: npm run build -- --vendor=${{ matrix.vendor }}
 
   deploy:
     name: Deploy
@@ -44,7 +48,7 @@ jobs:
 
     strategy:
       matrix:
-        vendor: [portal-fundermaps]
+        vendor: [portal-risk-fundermaps]
 
     steps:
     - uses: actions/checkout@v2
