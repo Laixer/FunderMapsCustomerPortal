@@ -24,7 +24,14 @@
             <strong>Funderingstype:</strong>
             {{ translateFoundationType(this.risk.foundationType) }}
           </li>
-          <li v-if="this.risk.restorationCosts !== null">
+          <li
+            v-if="
+              this.risk.restorationCosts !== null &&
+              [FoundationRisk.C, FoundationRisk.D, FoundationRisk.E].includes(
+                this.risk.foundationRisk
+              )
+            "
+          >
             <strong>Indicatieve herstelkosten:</strong>
             {{ this.formatter.format(this.risk.restorationCosts) }}
           </li>
