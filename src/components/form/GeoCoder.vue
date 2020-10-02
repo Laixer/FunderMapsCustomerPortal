@@ -41,8 +41,6 @@ import { Debounce } from 'vue-debounce-decorator'
 import FormField from '@/components/common/FormField.vue'
 
 import Address from '@/types/Address'
-import { formatAddressWithMarkup } from '@/helpers/text'
-
 
 @Component
 export default class GeoCoder extends FormField {
@@ -126,7 +124,7 @@ export default class GeoCoder extends FormField {
    * HTML markup so we can use highlighting.
    */
   private format(address: Address): string {
-    return formatAddressWithMarkup(address, this.fieldValue as string)
+    return address.labelWithMarkup(this.fieldValue as string)
   }
 }
 </script>

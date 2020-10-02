@@ -1,7 +1,12 @@
 $PRIMARY_COLOR: #2657FF;
+$BREAKPOINT: 900px;
 
 .Header {
     &__Logo {
-        height: 50px;
+        height: 38px;
+
+        @media only screen and (min-width: $BREAKPOINT) {
+            height: 48px;
+        }
     }
 }
