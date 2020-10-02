@@ -117,7 +117,7 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
     if (isPile(this.risk.foundationType)) {
       if (this.risk.drystand !== null) {
-        if (this.risk.drystand < 0) {
+        if (this.risk.drystand > 0) {
           return `Er komt regelmatig een droogstand van de fundering voor. De grondwaterstand staat ca. <strong>${Math.abs(this.risk.drystand).toFixed(2)}</strong> meter lager dan het hoogstgelegen funderingshout. Dat kan schimmelaantasting aan de houten paalfundering veroorzaken dat tot funderingsschade kan leiden.`
         }
         else {
@@ -126,7 +126,7 @@ export default class ResultPage extends Mixins(QuestionMixin) {
       }
     } else {
       if (this.risk.dewateringDepth !== null) {
-        if (this.risk.dewateringDepth < 0) {
+        if (this.risk.dewateringDepth > 0) {
           return `Er komt regelmatig een ontwateringsdiepte van de fundering voor. De grondwaterstand staat ca. <strong>${Math.abs(this.risk.dewateringDepth).toFixed(2)} meter</strong> te hoog en komt daarmee dicht in de buurt van de fundering. Dat kan schadelijk voor het pand zijn.`
         } else {
           return `Er is doorgaans voldoende ontwateringsdiepte van de fundering. De grondwaterstand staat met een marge van ca. <strong>${Math.abs(this.risk.dewateringDepth).toFixed(2)} meter</strong> dieper dan de veilige zone.`
