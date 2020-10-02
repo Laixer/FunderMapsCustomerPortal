@@ -9,7 +9,9 @@
         :src="kcafLogo"
         alt="Logo__Second"
       />
-      <a href="" target="_blank">Hulp nodig?</a>
+      <a href="https://www.kcaf.nl/funderingslabel/" target="_blank">
+        Hulp nodig?
+      </a>
     </div>
     <ProgressBar v-if="steps" :step="step" :steps="steps" />
   </header>
