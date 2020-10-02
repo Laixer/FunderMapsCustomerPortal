@@ -1,8 +1,5 @@
 <template>
   <div class="Risk">
-    <div class="MapBox__Wrapper">
-      <MapBox :accessToken="token" :mapStyle="style" @load="handleMapbox" />
-    </div>
     <div class="Risk__Wrapper" v-if="this.risk !== null">
       <Title>{{ this.address.label_compact }}</Title>
       <RiskLabel :risk="this.risk" />
@@ -27,9 +24,7 @@
           <li
             v-if="
               this.risk.restorationCosts !== null &&
-              [FoundationRisk.C, FoundationRisk.D, FoundationRisk.E].includes(
-                this.risk.foundationRisk
-              )
+              this.restorationCostDescripton !== null
             "
           >
             <strong>Indicatieve herstelkosten:</strong>
@@ -37,6 +32,9 @@
           </li>
         </ul>
       </BodyText>
+    </div>
+    <div class="MapBox__Wrapper">
+      <MapBox :accessToken="token" :mapStyle="style" @load="handleMapbox" />
     </div>
   </div>
 </template>
@@ -178,29 +176,25 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 .Risk {
   display: flex;
   justify-content: space-between;
-  flex-direction: column-reverse;
-  max-width: 100%;
+  flex-direction: column;
   height: 100%;
 
   @media only screen and (min-width: $BREAKPOINT) {
-    flex-direction: row-reverse;
+    flex-direction: row;
   }
 
   &__Wrapper {
-    overflow-y: auto;
-    max-height: 100%;
+    flex-basis: auto;
+    order: 1;
+
     display: flex;
     flex-direction: column;
-    width: auto;
-    height: 60%;
     max-width: 100%;
     justify-content: flex-start;
     padding: 25px 20px;
-
+    flex-basis: 66%;
     @media only screen and (min-width: $BREAKPOINT) {
-      padding: 25px 20px;
-      height: auto;
-      width: 40%;
+      flex-basis: auto;
     }
 
     .Title,
@@ -209,19 +203,17 @@ export default class ResultPage extends Mixins(QuestionMixin) {
       margin-bottom: 24px;
     }
     .RiskLabel {
-      margin: 0 10px 24px 10px;
+      margin: 0 0 24px 0;
     }
   }
   .MapBox__Wrapper {
-    position: relative;
-
+    order: 2;
     max-width: 100%;
-    width: auto;
-    height: 40%;
+    height: 265px;
 
     @media only screen and (min-width: $BREAKPOINT) {
-      height: auto;
-      width: 60%;
+      flex-basis: 66%;
+      height: 100%;
     }
   }
 }
