@@ -3,9 +3,9 @@
     <div class="Home__Wrapper">
       <div class="Home--left">
 
-        <div class="alert alert-warning" role="alert">
+        <!-- <div class="alert alert-warning" role="alert">
           Momenteel is het erg druk, probeer het later opnieuw.
-        </div>
+        </div> -->
 
         <Title>
           <span v-html="vendor.home.title" />
