@@ -93,29 +93,23 @@ export default class AddressQuestion extends Mixins(QuestionMixin) {
     let nummeraanduiding = `NL.IMBAG.NUMMERAANDUIDING.${pdok.response.docs[0].nummeraanduiding_id}`
     console.log('nummeraanduiding', nummeraanduiding)
 
-    //let item = result.response;
-    this.address = new Address(
-      nummeraanduiding,
-      "", //item.buildingGeometry,
-      "", //item.buildingId,
-      "", //item.buildingNumber,
-      "", //item.builtYear,
-      "", //item.postalCode,
-      "", //item.street,
-      "" //item.city
-    );
-    this.address.weergavenaam = address.weergavenaam;
+    this.address = address;
+
+    // TODO Beun
+    this.address.id = nummeraanduiding;
+    this.address.centroide_ll = pdok.response.docs[0].centroide_ll;
 
     console.log('this.address', this.address);
 
-    //this.handleCoordinates()
+    this.handleCoordinates()
   }
 
   private handleCoordinates() {
     if (this.map && this.address) {
-      this.map.getSource('address').setData(this.address.geojson)
+
+      //this.map.getSource('address').setData(target)
       this.map.flyTo({
-        center: this.address.coordinates,
+        center: this.address.centerCoordinates,
         zoom: 18
       })
     }

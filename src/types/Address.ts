@@ -13,6 +13,7 @@ export default class Address {
 
   // TODO PDOK
   weergavenaam: string;
+  centroide_ll: string;
 
   constructor(
     id: string,
@@ -34,10 +35,25 @@ export default class Address {
     this.city = city
 
     this.weergavenaam = '';
+    this.centroide_ll = '';
   }
 
   get geojson(): any {
     return JSON.parse(hex_to_ascii(this.buildingGeometry))
+  }
+
+  get centerCoordinates(): any {
+    if (!this.centroide_ll) {
+      console.log('Address doesnt have centroide_ll, returning null')
+      return null;
+    }
+
+    // TODO This is not bulletproof at all, import gis library instead.
+    const withHooks = this.centroide_ll.substr(5)
+    const numbersWithSpace = withHooks.substr(1, withHooks.length - 2)
+    const splitAsText = numbersWithSpace.split(' ');
+    
+    return [Number(splitAsText[0]), Number(splitAsText[1])]
   }
 
   /**

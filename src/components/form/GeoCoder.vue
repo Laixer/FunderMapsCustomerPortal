@@ -95,6 +95,7 @@ export default class GeoCoder extends FormField {
               "" //item.city
             );
             x.weergavenaam = item.weergavenaam;
+            x.centroide_ll = item.centroide_ll;
 
           this.suggestions.push(x);
         })

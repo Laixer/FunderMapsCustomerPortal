@@ -159,9 +159,9 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
   private handleMapbox({ map }: Record<string, any>) {
     this.map = map
-    // if (this.address !== undefined) {
-    //   this.handleCoordinates()
-    // }
+    if (this.address !== undefined) {
+      this.handleCoordinates()
+    }
   }
 
   get addressLabel(): string {
@@ -170,9 +170,9 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
   private handleCoordinates() {
     if (this.map && this.address) {
-      this.map.getSource('address').setData(this.address.geojson)
+      // this.map.getSource('address').setData(this.address.geojson)
       this.map.flyTo({
-        center: this.address.coordinates,
+        center: this.address.centerCoordinates,
         zoom: 18
       })
     }
