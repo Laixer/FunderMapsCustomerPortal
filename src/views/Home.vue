@@ -2,6 +2,11 @@
   <Page class="Home">
     <div class="Home__Wrapper">
       <div class="Home--left">
+
+        <div class="alert alert-warning" role="alert">
+          Momenteel is het erg druk, probeer het later opnieuw.
+        </div>
+
         <Title>
           <span v-html="vendor.home.title" />
         </Title>
@@ -12,10 +17,13 @@
           <span v-html="vendor.home.content" />
         </BodyText>
         <div>
-          <Button id="navigateBodyButton" @click="handleNavigate">
-            <span>Bekijk funderingsrisico</span>
+          <!-- <Button 
+            id="navigateBodyButton" 
+            :disabled="true"
+            @click="handleNavigate">
+            <span>Bekijk funderingsrisico e</span>
             <SvgIcon icon="icon_arrow_next" />
-          </Button>
+          </Button> -->
         </div>
       </div>
       <div class="Home--right">

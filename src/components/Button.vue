@@ -1,7 +1,7 @@
 <template>
   <div
     class="Button"
-    :class="{ 'Button--submit': isSubmit, 'Button--wide': wide, 'Button--ghost': ghost, 'Button--line': line }"
+    :class="{ 'Button--submit': isSubmit, 'Button--wide': wide, 'Button--ghost': ghost, 'Button--line': line}"
     @click="handleClick"
   >
     <slot />
