@@ -17,13 +17,12 @@
           <span v-html="vendor.home.content" />
         </BodyText>
         <div>
-          <!-- <Button 
+          <Button 
             id="navigateBodyButton" 
-            :disabled="true"
             @click="handleNavigate">
-            <span>Bekijk funderingsrisico e</span>
+            <span>Bekijk funderingsrisico</span>
             <SvgIcon icon="icon_arrow_next" />
-          </Button> -->
+          </Button>
         </div>
       </div>
       <div class="Home--right">
