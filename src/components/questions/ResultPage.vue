@@ -26,7 +26,8 @@
               this.risk.restorationCosts !== null &&
               this.restorationCostDescripton !== null &&
               this.risk.restorationCosts !== undefined &&
-              this.risk.restorationCosts !== 0
+              this.risk.restorationCosts !== NaN &&
+              this.risk.restorationCosts > 0
             "
           >
             <strong>Indicatieve herstelkosten:</strong>
