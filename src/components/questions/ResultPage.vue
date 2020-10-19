@@ -82,33 +82,19 @@ export default class ResultPage extends Mixins(QuestionMixin) {
     minimumFractionDigits: 2
   })
 
-  async created(): Promise<void> {
+  /**
+   * Creation function to assign variables.
+   */
+  created(): void {
+    // Get everything from our store.
+    // TODO Do properly with props.
     this.address = this.$store.state.address
+    this.risk = this.$store.state.risk
 
     if (this.address === null) {
       console.log('result has null address, returning')
       return;
     }
-
-    console.log('result this.address', this.address)
-
-    const id = this.$store.state.address?.buildingId
-    const json = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/risk2?id=${this.address.id}`).then(res => {
-      if (!res.ok) throw new Error(res.statusText)
-      return res.json()
-    })
-
-    console.log('risk json', json)
-
-    this.risk = new AnalysisRisk(
-      json.neighborhoodId,
-      json.foundationType,
-      json.foundationRisk,
-      json.restorationCosts,
-      json.dewateringDepth,
-      json.drystand,
-      json.reliability
-    )
   }
 
   get riskLabelDescription(): string | null {
@@ -170,7 +156,10 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
   private handleCoordinates() {
     if (this.map && this.address) {
+
+      // TODO Geom outline
       // this.map.getSource('address').setData(this.address.geojson)
+      
       this.map.flyTo({
         center: this.address.centerCoordinates,
         zoom: 18

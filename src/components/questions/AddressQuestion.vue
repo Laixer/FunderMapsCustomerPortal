@@ -34,6 +34,7 @@ import GeoCoder from '@/components/form/GeoCoder.vue'
 
 import MapBox from '@/components/common/MapBox.vue'
 import Address from '@/types/Address'
+import { mapActions } from 'vuex'
 
 @Component({
   mixins: [QuestionMixin],
@@ -41,7 +42,7 @@ import Address from '@/types/Address'
     Page, Button, SvgIcon, Title,
     Form, GeoCoder,
     MapBox
-  },
+  }
 })
 export default class AddressQuestion extends Mixins(QuestionMixin) {
   private address: Address | null = null;
@@ -74,40 +75,34 @@ export default class AddressQuestion extends Mixins(QuestionMixin) {
     // }
   }
 
+  /**
+   * Gets called when we select an address in GeoCoder.vue.
+   */
   private async handleAddress(address: Address) {
-
     if (address === null) {
       console.log('handleaddress null return')
       return;
     }
 
-    console.log('handleaddress address', address)
+    // Get the address info from PDOK
+    await this.$store.dispatch('getPdokAddress', { pdokId: address.id })
 
-    const pdok = await fetch(`https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=${address.id}`)
-          .then(res => {
-            if (!res.ok) throw new Error(res.statusText)
-            return res.json()
-          })
+    // TODO Do properly with a prop
+    this.address = this.$store.getters.address;
 
-    console.log('pdok', pdok)
-    let nummeraanduiding = `NL.IMBAG.NUMMERAANDUIDING.${pdok.response.docs[0].nummeraanduiding_id}`
-    console.log('nummeraanduiding', nummeraanduiding)
-
-    this.address = address;
-
-    // TODO Beun
-    this.address.id = nummeraanduiding;
-    this.address.centroide_ll = pdok.response.docs[0].centroide_ll;
-
-    console.log('this.address', this.address);
-
+    // First handle map flyby, then get the risk.
     this.handleCoordinates()
+
+    // Get the risk from our data store
+    await this.$store.dispatch('getRisk');
   }
 
   private handleCoordinates() {
     if (this.map && this.address) {
 
+      // TODO Geom outline
       //this.map.getSource('address').setData(target)
+      
       this.map.flyTo({
         center: this.address.centerCoordinates,
         zoom: 18

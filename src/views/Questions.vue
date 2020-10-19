@@ -145,8 +145,16 @@ export default class Questions extends Vue {
       }
     }
 
+    // TODO Hardcoded workaround to remove page 2
+    if (this.currentStep === 1 && direction === 1) {
+      this.currentStep += 2;
+    }
+    else if (this.currentStep === 3 && direction === -1) {
+      this.currentStep -= 2;
+    }
+
+    // Always invalidate.
     this.valid = false
-    this.currentStep += direction
   }
 
 }
