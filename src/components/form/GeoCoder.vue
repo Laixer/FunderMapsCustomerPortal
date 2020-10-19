@@ -70,7 +70,8 @@ export default class GeoCoder extends FormField {
       try {
 
         // Request addresses from API
-        const json = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/address-suggest?query=${target.value}&limit=5`)
+        //const json = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/address-suggest?query=${target.value}&limit=5`)
+        const json = await fetch(`https://geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?q=${target.value}&fq=type:adres&rows=5`)
           .then(res => {
             if (!res.ok) throw new Error(res.statusText)
             return res.json()
@@ -79,21 +80,23 @@ export default class GeoCoder extends FormField {
         this.suggestions = []
 
         // Populate address collection with parsed TypeScript classes
-        json.forEach((item: any) => {
-          this.suggestions.push(
+        json.response.docs.forEach((item: any) => {
+          
             // Parsing JSON to a class like thisis not very pretty 
             // but it will have to do until we find a better alternative
-            new Address(
-              item.addressId,
-              item.buildingGeometry,
-              item.buildingId,
-              item.buildingNumber,
-              item.builtYear,
-              item.postalCode,
-              item.street,
-              item.city
-            ))
+            let x = new Address(
+              item.id,
+              "", //item.buildingGeometry,
+              "", //item.buildingId,
+              "", //item.buildingNumber,
+              "", //item.builtYear,
+              "", //item.postalCode,
+              "", //item.street,
+              "" //item.city
+            );
+            x.weergavenaam = item.weergavenaam;
 
+          this.suggestions.push(x);
         })
       } catch (e) {
         // If the response fails, clear the collection
@@ -113,7 +116,7 @@ export default class GeoCoder extends FormField {
    */
   private handleSelect(address: Address): void {
     this.suggestions = []
-    this.fieldValue = address.label
+    this.fieldValue = address.weergavenaam
     this.$emit('address', address)
   }
 

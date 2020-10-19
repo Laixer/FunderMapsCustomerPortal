@@ -69,14 +69,46 @@ export default class AddressQuestion extends Mixins(QuestionMixin) {
 
   private handleMapbox({ map }: Record<string, any>) {
     this.map = map
-    if (this.address !== undefined) {
-      this.handleCoordinates()
-    }
+    // if (this.address !== undefined) {
+    //   this.handleCoordinates()
+    // }
   }
 
-  private handleAddress(address: Address) {
-    this.address = address
-    this.handleCoordinates()
+  private async handleAddress(address: Address) {
+
+    if (address === null) {
+      console.log('handleaddress null return')
+      return;
+    }
+
+    console.log('handleaddress address', address)
+
+    const pdok = await fetch(`https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=${address.id}`)
+          .then(res => {
+            if (!res.ok) throw new Error(res.statusText)
+            return res.json()
+          })
+
+    console.log('pdok', pdok)
+    let nummeraanduiding = `NL.IMBAG.NUMMERAANDUIDING.${pdok.response.docs[0].nummeraanduiding_id}`
+    console.log('nummeraanduiding', nummeraanduiding)
+
+    //let item = result.response;
+    this.address = new Address(
+      nummeraanduiding,
+      "", //item.buildingGeometry,
+      "", //item.buildingId,
+      "", //item.buildingNumber,
+      "", //item.builtYear,
+      "", //item.postalCode,
+      "", //item.street,
+      "" //item.city
+    );
+    this.address.weergavenaam = address.weergavenaam;
+
+    console.log('this.address', this.address);
+
+    //this.handleCoordinates()
   }
 
   private handleCoordinates() {

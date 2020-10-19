@@ -85,11 +85,20 @@ export default class ResultPage extends Mixins(QuestionMixin) {
   async created(): Promise<void> {
     this.address = this.$store.state.address
 
+    if (this.address === null) {
+      console.log('result has null address, returning')
+      return;
+    }
+
+    console.log('result this.address', this.address)
+
     const id = this.$store.state.address?.buildingId
-    const json = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/risk?id=${id}`).then(res => {
+    const json = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/risk2?id=${this.address.id}`).then(res => {
       if (!res.ok) throw new Error(res.statusText)
       return res.json()
     })
+
+    console.log('risk json', json)
 
     this.risk = new AnalysisRisk(
       json.neighborhoodId,
@@ -150,9 +159,9 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
   private handleMapbox({ map }: Record<string, any>) {
     this.map = map
-    if (this.address !== undefined) {
-      this.handleCoordinates()
-    }
+    // if (this.address !== undefined) {
+    //   this.handleCoordinates()
+    // }
   }
 
   get addressLabel(): string {

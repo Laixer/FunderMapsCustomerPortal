@@ -11,6 +11,9 @@ export default class Address {
   street: string;
   city: string;
 
+  // TODO PDOK
+  weergavenaam: string;
+
   constructor(
     id: string,
     buildingGeometry: string,
@@ -29,6 +32,8 @@ export default class Address {
     this.postalCode = postalCode
     this.street = street
     this.city = city
+
+    this.weergavenaam = '';
   }
 
   get geojson(): any {
@@ -49,28 +54,32 @@ export default class Address {
   }
 
   get label(): string {
-    return this._format()
+    //return this._format()
+    return this.weergavenaam
   }
 
   get label_compact(): string {
-    return this._format(true, true, false, true)
+    //return this._format(true, true, false, true)
+    return this.weergavenaam
   }
 
   labelWithMarkup(inputValue: string): string {
-    let formatted = this._format()
-    const indexOf = formatted.toLowerCase().indexOf(inputValue.toLowerCase())
+    // let formatted = this._format()
+    // const indexOf = formatted.toLowerCase().indexOf(inputValue.toLowerCase())
 
-    formatted = formatted.length > 32
-      ? formatted.substr(0, 32 - 1) + '&hellip;'
-      : formatted;
+    // formatted = formatted.length > 32
+    //   ? formatted.substr(0, 32 - 1) + '&hellip;'
+    //   : formatted;
 
-    if (indexOf >= 0) {
-      const length: number = inputValue.length as number
-      const end: number = indexOf + length
-      return [formatted.slice(0, indexOf), '<strong>', formatted.slice(indexOf, end), '</strong>', formatted.slice(end, formatted.length)].join('')
-    }
+    // if (indexOf >= 0) {
+    //   const length: number = inputValue.length as number
+    //   const end: number = indexOf + length
+    //   return [formatted.slice(0, indexOf), '<strong>', formatted.slice(indexOf, end), '</strong>', formatted.slice(end, formatted.length)].join('')
+    // }
 
-    return formatted
+    // return formatted
+
+    return this.weergavenaam
   }
 
   private _format(includeStreet = true, includeBuildingNumber = true, includePostalCode = true, includeCity = true): string {
