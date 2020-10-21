@@ -7,10 +7,10 @@
         v-if="this.riskLabelDescription"
         v-html="this.riskLabelDescription"
       />
-      <BodyText
+      <!-- <BodyText
         v-if="this.restorationCostDescripton"
         v-html="this.restorationCostDescripton"
-      />
+      /> -->
       <BodyText
         v-if="this.propertyDescription"
         v-html="this.propertyDescription"
