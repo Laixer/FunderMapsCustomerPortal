@@ -12,6 +12,7 @@
           :novalidate="false"
           label="Zoek het adres"
           id="address"
+          placeholder="Stationsplein 5, 1012AB Amsterdam"
           :valid="isValid"
           @address="handleAddress"
         />
