@@ -30,8 +30,8 @@
               this.risk.restorationCosts > 0
             "
           >
-            <strong>Indicatieve herstelkosten:</strong>
-            {{ this.formatter.format(this.risk.restorationCosts) }}
+            <!-- <strong>Indicatieve herstelkosten:</strong> -->
+            <!-- {{ this.formatter.format(this.risk.restorationCosts) }} -->
           </li>
         </ul>
       </BodyText>

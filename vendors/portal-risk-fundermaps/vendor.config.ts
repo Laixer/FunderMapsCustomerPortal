@@ -12,8 +12,8 @@ export default {
     logo: logo,
     home: {
         title: "Opvragen Funderingslabel",
-        subtitle: "Het Funderingslabel geeft een indicatie van het te verwachten risico op funderingsproblematiek.",
-        content: "<p>Het label is tot stand gekomen door het combineren van pandgegevens en gegevens over ondergrond en grondwater. Toetsingen worden uitgevoerd voor; schimmelaantasting door droogstand van houten palen (paalrot), bacteriële aantasting (palenpest), gebrek aan draagkracht/negatieve kleef, bodemdaling/bodeminklinking en verschilzakking voor niet onderheide panden.</p><p>Meer informatie over funderingsproblematiek en de toetsingen vindt u op de website van het onafhankelijk <a href='https://www.kcaf.nl/funderingslabel/' target='_blank'>Kennis Centrum Aanpak Funderingsproblematiek</a>.</p>",
+        subtitle: "Het funderingsrisico geeft een indicatie van een indicatief te verwachten risico op funderingsproblematiek.",
+        content: "<p>Het risico is tot stand gekomen door het combineren van landelijk beschikbare en openbare gegevens over panden en gegevens over ondergrond en grondwater.</p><p>Meer informatie over funderingsproblematiek, toetsingen en de bepaling over het funderingsrisico vindt u op de website van het onafhankelijk <a href='https://www.kcaf.nl/funderingslabel/' target='_blank'>Kennis Centrum Aanpak Funderingsproblematiek</a>.</p>",
         image: homeImage
     },
     final: {
