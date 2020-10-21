@@ -125,7 +125,7 @@ export default class ResultPage extends Mixins(QuestionMixin) {
     } else {
       if (this.risk.dewateringDepth !== null) {
         if (this.risk.dewateringDepth > 0) {
-          return `De grondwaterstand staat <strong>${Math.abs(this.risk.dewateringDepth).toFixed(2)} meter</strong> dieper dan de onveilige zone. Dat is gunstig voor het behoud van de fundering. Er is doorgaans voldoende ontwateringsdiepte van de fundering.`
+          return `De grondwaterstand staat <strong>${Math.abs(this.risk.dewateringDepth).toFixed(2)} meter</strong> dieper dan de onveilige zone. Dat is gunstig voor het behoud van de fundering.`
           } else {
           return `De grondwaterstand staat <strong>${Math.abs(this.risk.dewateringDepth).toFixed(2)} meter</strong> te hoog en komt daarmee dicht in de buurt van de fundering. Dat kan schadelijk zijn.`
         }
