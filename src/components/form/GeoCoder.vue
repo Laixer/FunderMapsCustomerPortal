@@ -61,7 +61,7 @@ export default class GeoCoder extends FormField {
   /**
    * Handle input changes
    */
-  @Debounce(200)
+  @Debounce(20)
   async handleInput(e: Event): Promise<void> {
     const target = e.target as HTMLInputElement
 
