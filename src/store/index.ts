@@ -116,7 +116,7 @@ export default new Vuex.Store({
         return;
       }
 
-      const riskResponse = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/risk2?id=${getters.address.id}`)
+      const riskResponse = await fetch(`${process.env.VUE_APP_API_BASE_URL}/api/incident-portal/risk?id=${getters.address.id}`)
         .then(res => {
           if (!res.ok) { 
             throw new Error(res.statusText)
