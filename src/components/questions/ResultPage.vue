@@ -102,7 +102,10 @@ export default class ResultPage extends Mixins(QuestionMixin) {
 
   get riskLabelDescription(): string | null {
     if (!this.risk) return null
-    return describe(this.risk.foundationRisk)
+    let text = `Deze inschatting is een indicatie. In de testfase kunnen uitgangspunten onjuist zijn. U kunt dit bij ons aangeven voor aanpassing. Mede op basis van deze terugkoppeling wordt het model de komende periode verbeterd.`
+    text += '<br/>'
+    text += describe(this.risk.foundationRisk)
+    return text
   }
 
   get restorationCostDescripton(): string | null {
