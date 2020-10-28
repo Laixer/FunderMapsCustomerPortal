@@ -38,10 +38,10 @@
         <span>
           <a
             id="changeLabel"
-            href="https://www.kcaf.nl/funderingslabel/"
+            href="https://www.kcaf.nl/funderingsrisico/"
             target="_blank"
           >
-            Label wijzigen?
+            Risico wijzigen?
           </a>
         </span>
       </template>
