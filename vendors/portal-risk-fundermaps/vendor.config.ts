@@ -11,9 +11,9 @@ export default {
     background: background,
     logo: logo,
     home: {
-        title: "Opvragen Funderingsrisico",
-        subtitle: "Het funderingsrisico geeft een indicatie van een indicatief te verwachten risico op funderingsproblematiek.",
-        content: "<p>Het risico is tot stand gekomen door het combineren van landelijk beschikbare en openbare gegevens over panden en gegevens over ondergrond en grondwater.</p><p>Meer informatie over funderingsproblematiek, toetsingen en de bepaling over het funderingsrisico vindt u op de website van het onafhankelijk <a href='https://www.kcaf.nl/funderingslabel/' target='_blank'>Kennis Centrum Aanpak Funderingsproblematiek</a>.</p>",
+        title: "Indicatief Funderingsrisico",
+        subtitle: "In tegenstelling tot enkele media uitingen de afgelopen 2 weken is de inschatting van het funderingsrisico geen verplicht label volgend jaar. Het doel van de risicoschatting is het verhogen van de waakzaamheid voor de funderingsproblematiek in Nederland.",
+        content: "<p>Op het moment is het model achter het funderingsrisico en de ontsluiting hiervan via de website in een testfase. Dit werd aanvankelijk beoogd tot eind december door te zetten. Door het hogere aantal bezoekers en daarmee ook het hoger aantal meldingen is er besloten de testfase vervroegd te beëindigen. De komende maanden wordt het model, mede op basis van de meldingen aangepast en verbeterd.</p><p>Voor meer informatie wordt verwezen naar de website van <a href='https://www.kcaf.nl/funderingsrisico/'>Kennis Centrum Aanpak Funderingsproblematiek</a>.</p>",
         image: homeImage
     },
     final: {
