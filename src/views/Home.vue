@@ -16,14 +16,14 @@
         <BodyText>
           <span v-html="vendor.home.content" />
         </BodyText>
-        <div>
+        <!-- <div>
           <Button 
             id="navigateBodyButton" 
             @click="handleNavigate">
             <span>Bekijk funderingsrisico</span>
             <SvgIcon icon="icon_arrow_next" />
           </Button>
-        </div>
+        </div> -->
       </div>
       <div class="Home--right">
         <img :src="vendor.home.image" width="640" height="585" alt="Logo" />
