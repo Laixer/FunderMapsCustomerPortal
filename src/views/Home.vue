@@ -2,7 +2,6 @@
   <Page class="Home">
     <div class="Home__Wrapper">
       <div class="Home--left">
-
         <!-- <div class="alert alert-warning" role="alert">
           Momenteel is het erg druk, probeer het later opnieuw.
         </div> -->
@@ -32,10 +31,10 @@
 
     <template slot="footer">
       <Copyright />
-      <Button id="navigateFooterButton" @click="handleNavigate">
+      <!-- <Button id="navigateFooterButton" @click="handleNavigate">
         <span>Bekijk funderingsrisico</span>
         <SvgIcon icon="icon_arrow_next" />
-      </Button>
+      </Button> -->
     </template>
   </Page>
 </template>
